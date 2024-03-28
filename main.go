@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/Mireu-Lab/golang-practice-project/src/src_test"
+
+	"github.com/Mireu-Lab/golang-practice-project/greeting"
 )
 
 func main() {
-	fmt.Printf("Hi %s", "mireu")
-	src_test.Asay()
+	fmt.Println(greeting.HelloKo())
+	fmt.Println(greeting.HelloEn())
 }
