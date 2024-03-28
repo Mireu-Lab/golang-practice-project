@@ -1,4 +1,4 @@
-package src_test
+package src
 
 import "fmt"
 
