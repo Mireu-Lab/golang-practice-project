@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// git setting
 func Create(rg *gin.RouterGroup) {
 	create := rg.Group("/create")
 	go create.POST("/query", QueryType_Create_Program)
@@ -50,5 +51,5 @@ func JSONType_Create_Program(g *gin.Context) {
 
 	g.JSON(200, H{
 		"time": time.RFC3339,
-		"msg":  CreateJsondata})
+		"msg":  CreateJsondata.msg})
 }

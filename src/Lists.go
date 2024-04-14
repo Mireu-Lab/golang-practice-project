@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// gin setting
 func Lists(rg *gin.RouterGroup) {
 	ping := rg.Group("/lists")
 	go ping.GET("/", Lists_Program)
