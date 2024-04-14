@@ -12,7 +12,7 @@ func Ping(rg *gin.RouterGroup) {
 }
 
 func Ping_Program(g *gin.Context) {
-	g.JSONP(
-		200,
-		H{"time": time.RFC3339, "msg": "pong"})
+	g.JSONP(200, H{
+		"time": time.RFC3339,
+		"msg":  "pong"})
 }

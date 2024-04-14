@@ -14,7 +14,7 @@ func main() {
 	src.Ping(v1)
 	src.Lists(v1)
 	src.Create(v1)
-	// src.Updata(v1)
+	src.Updata(v1)
 	// src.Delete(v1)
 
 	// router.GET("/", src.Lists())

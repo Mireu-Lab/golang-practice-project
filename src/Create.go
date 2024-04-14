@@ -3,7 +3,6 @@ package src
 import (
 	"encoding/json"
 	"log"
-	"net/http"
 	"time"
 
 	"github.com/Mireu-Lab/golang-practice-project/src/csvfile"
@@ -16,7 +15,7 @@ func Create(rg *gin.RouterGroup) {
 	go create.POST("/json", JSONType_Create_Program)
 }
 
-type postJsonInfo struct {
+type CreateJsonInfo struct {
 	msg string `json:msg`
 }
 
@@ -29,27 +28,27 @@ func QueryType_Create_Program(g *gin.Context) {
 		log.Fatalln(err)
 	}
 
-	g.JSON(http.StatusOK, H{
+	g.JSON(200, H{
 		"time": time.RFC3339,
 		"msg":  msg})
 }
 
 func JSONType_Create_Program(g *gin.Context) {
-	var Jsondata postJsonInfo
+	var CreateJsondata CreateJsonInfo
 
-	err := json.NewDecoder(g.Request.Body).Decode(&Jsondata)
+	err := json.NewDecoder(g.Request.Body).Decode(&CreateJsondata)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	var WriteData = []string{time.RFC3339, Jsondata.msg}
+	var WriteData = []string{time.RFC3339, CreateJsondata.msg}
 
 	err = csvfile.Write("./File/output.csv", WriteData)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	g.JSON(http.StatusOK, H{
+	g.JSON(200, H{
 		"time": time.RFC3339,
-		"msg":  Jsondata})
+		"msg":  CreateJsondata})
 }
