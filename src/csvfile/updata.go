@@ -1,5 +1,0 @@
-package csvfile
-
-func updata() {
-
-}

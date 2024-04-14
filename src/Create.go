@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Mireu-Lab/golang-practice-project/src/csvfile"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,12 +21,7 @@ type postJsonInfo struct {
 
 func QueryType_Create_Program(g *gin.Context) {
 	msg := g.Query("msg")
-	var WriteData = []string{time.RFC3339, msg}
-
-	err := csvfile.Write("./File/output.csv", WriteData)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	// var WriteData = []string{time.RFC3339, msg}
 
 	g.JSON(http.StatusOK, H{
 		"time": time.RFC3339,
@@ -42,12 +36,7 @@ func JSONType_Create_Program(g *gin.Context) {
 		log.Fatalln(err)
 	}
 
-	var WriteData = []string{time.RFC3339, Jsondata.msg}
-
-	err = csvfile.Write("./File/output.csv", WriteData)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	// var WriteData = []string{time.RFC3339, Jsondata.msg}
 
 	g.JSON(http.StatusOK, H{
 		"time": time.RFC3339,
