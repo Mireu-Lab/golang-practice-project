@@ -13,6 +13,7 @@ func Lists(rg *gin.RouterGroup) {
 }
 
 func Lists_Program(g *gin.Context) {
+	sql.Read()
 	g.JSONP(200, H{
 		"cell_time": time.RFC3339,
 		"msg_list":  sql.Read()})

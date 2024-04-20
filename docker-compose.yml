@@ -18,3 +18,8 @@ services:
       - './:/home/Hosting/workspace:rw'
       - '~/.ssh:/home/Hosting/.ssh:ro'
       - '~/.gitconfig:/home/Hosting/.gitconfig:ro'
+
+networks:
+  default:
+    external:
+      name: ollama_network

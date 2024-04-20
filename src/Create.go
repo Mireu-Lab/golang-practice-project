@@ -2,10 +2,11 @@ package src
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
-	"net/http"
 	"time"
 
+	"github.com/Mireu-Lab/golang-practice-project/src/sql"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,30 +16,47 @@ func Create(rg *gin.RouterGroup) {
 	go create.POST("/json", JSONType_Create_Program)
 }
 
-type postJsonInfo struct {
-	msg string `json:msg`
-}
-
 func QueryType_Create_Program(g *gin.Context) {
 	msg := g.Query("msg")
-	// var WriteData = []string{time.RFC3339, msg}
 
-	g.JSON(http.StatusOK, H{
+	errCode := sql.Write(msg)
+
+	g.JSON(errCode, H{
 		"time": time.RFC3339,
 		"msg":  msg})
 }
 
-func JSONType_Create_Program(g *gin.Context) {
-	var Jsondata postJsonInfo
+type postJsonInfo struct {
+	msg string `json:msg`
+}
 
-	err := json.NewDecoder(g.Request.Body).Decode(&Jsondata)
+func JSONType_Create_Program(g *gin.Context) {
+	var errCode int = 500
+	var input postJsonInfo
+	var ReturnJson = H{
+		"path": "/v1/json",
+		"time": time.RFC3339,
+		"msg":  input.msg}
+
+	err := json.NewDecoder(g.Request.Body).Decode(&input)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	// var WriteData = []string{time.RFC3339, Jsondata.msg}
+	// err := g.ShouldBindBodyWith(&Jsondata, binding.JSON)
+	// err := g.ShouldBindJSON(&input)
+	// if err != nil {
+	// 	errCode = 403
+	// 	ReturnJson["ErrorMessage"] = err.Error()
+	// }
 
-	g.JSON(http.StatusOK, H{
-		"time": time.RFC3339,
-		"msg":  Jsondata})
+	fmt.Println(input)
+
+	if input.msg != "" {
+		errCode = sql.Write(input.msg)
+	} else {
+		ReturnJson["ErrorMessage"] = "The message is empty."
+	}
+
+	g.JSON(errCode, ReturnJson)
 }
