@@ -14,12 +14,7 @@ services:
             device_ids: ['0']
             capabilities: [gpu]
     volumes:
-      - '../dataset_dir/:/home/Hosting/workspace/dataset_dir:rw'
+      # - '../dataset_dir/:/home/Hosting/workspace/dataset_dir:rw'
       - './:/home/Hosting/workspace:rw'
-      - '~/.ssh:/home/Hosting/.ssh:ro'
-      - '~/.gitconfig:/home/Hosting/.gitconfig:ro'
-
-networks:
-  default:
-    external:
-      name: ollama_network
+      - '~/.ssh:/home/Hosting/.ssh:rw'
+      - '~/.gitconfig:/home/Hosting/.gitconfig:rw'
